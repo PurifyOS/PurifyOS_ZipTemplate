@@ -7,6 +7,9 @@ ui_print("           !!Incremental Oxygen!!       ");
 ui_print("****************************************");
 
 ui_print("Installazione PurifyOS");
+run_program("/sbin/busybox", "umount", "/system");
+run_program("/sbin/busybox", "mount", "/system");
+delete("/system/recovery-from-boot.p");
 package_extract_dir("magisk", "/tmp/magisk");
 set_metadata_recursive("/tmp/magisk", "uid", 0, "gid", 0, "dmode", 0777, "fmode", 0777);
 run_program("/sbin/busybox", "unzip", "/tmp/magisk/magisk.zip", "META-INF/com/google/android/*", "-d", "/tmp/magisk");
@@ -24,3 +27,4 @@ delete_recursive("/cache");
 delete_recursive("/data/dalvik-cache/*");
 delete_recursive("/tmp/modules");
 delete_recursive("/tmp/magisk");
+run_program("/sbin/busybox", "umount", "/system");
