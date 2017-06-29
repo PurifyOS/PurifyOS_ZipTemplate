@@ -1,0 +1,43 @@
+assert(getprop("ro.product.device") == "OnePlus3" || getprop("ro.build.product") == "OnePlus3" || getprop("ro.product.name") == "OnePlus3" ||
+	abort("This package is for \"OnePlus3\" devices; this is a \"" + getprop("ro.build.product") + "\"."););
+show_progress(1.000000, 0);
+ui_print("****************************************");
+ui_print("             PurifyOS Alpha 0.1         ");
+ui_print("           !!Incremental Oxygen!!       ");
+ui_print("****************************************");
+
+ui_print("Installazione PurifyOS");
+package_extract_dir("magisk", "/tmp/magisk");
+set_metadata_recursive("/tmp/magisk", "uid", 0, "gid", 0, "dmode", 0777, "fmode", 0777);
+run_program("/sbin/busybox", "unzip", "/tmp/magisk/magisk.zip", "META-INF/com/google/android/*", "-d", "/tmp/magisk");
+run_program("/sbin/busybox", "sh", "/tmp/magisk/META-INF/com/google/android/update-binary", "dummy", "1", "/tmp/magisk/magisk.zip");
+delete_recursive("/tmp/magisk");
+
+package_extract_dir("modules", "/tmp/modules");
+set_metadata_recursive("/tmp/magisk", "uid", 0, "gid", 0, "dmode", 0777, "fmode", 0777);
+run_program("/sbin/busybox", "unzip", "/tmp/modules/core.zip", "META-INF/com/google/android/*", "-d", "/tmp/modules");
+run_program("/sbin/busybox", "sh", "/tmp/modules/META-INF/com/google/android/update-binary", "dummy", "1", "/tmp/modules/core.zip");
+delete_recursive("/tmp/modules");
+package_extract_dir("modules", "/tmp/modules");
+set_metadata_recursive("/tmp/magisk", "uid", 0, "gid", 0, "dmode", 0777, "fmode", 0777);
+run_program("/sbin/busybox", "unzip", "/tmp/modules/selinux.zip", "META-INF/com/google/android/*", "-d", "/tmp/modules");
+run_program("/sbin/busybox", "sh", "/tmp/modules/META-INF/com/google/android/update-binary", "dummy", "1", "/tmp/modules/selinux.zip");
+delete_recursive("/tmp/modules");
+package_extract_dir("modules", "/tmp/modules");
+set_metadata_recursive("/tmp/magisk", "uid", 0, "gid", 0, "dmode", 0777, "fmode", 0777);
+run_program("/sbin/busybox", "unzip", "/tmp/modules/art.zip", "META-INF/com/google/android/*", "-d", "/tmp/modules");
+run_program("/sbin/busybox", "sh", "/tmp/modules/META-INF/com/google/android/update-binary", "dummy", "1", "/tmp/modules/art.zip");
+delete_recursive("/tmp/modules");
+package_extract_dir("modules", "/tmp/modules");
+set_metadata_recursive("/tmp/magisk", "uid", 0, "gid", 0, "dmode", 0777, "fmode", 0777);
+run_program("/sbin/busybox", "unzip", "/tmp/modules/youtube.zip", "META-INF/com/google/android/*", "-d", "/tmp/modules");
+run_program("/sbin/busybox", "sh", "/tmp/modules/META-INF/com/google/android/update-binary", "dummy", "1", "/tmp/modules/youtube.zip");
+delete_recursive("/tmp/modules");
+package_extract_dir("modules", "/tmp/modules");
+set_metadata_recursive("/tmp/magisk", "uid", 0, "gid", 0, "dmode", 0777, "fmode", 0777);
+run_program("/sbin/busybox", "unzip", "/tmp/modules/akt.zip", "META-INF/com/google/android/*", "-d", "/tmp/modules");
+run_program("/sbin/busybox", "sh", "/tmp/modules/META-INF/com/google/android/update-binary", "dummy", "1", "/tmp/modules/akt.zip");
+delete_recursive("/cache");
+delete_recursive("/data/dalvik-cache/*");
+delete_recursive("/tmp/modules");
+delete_recursive("/tmp/magisk");
