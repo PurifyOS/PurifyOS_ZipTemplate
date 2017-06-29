@@ -18,11 +18,9 @@ delete_recursive("/tmp/magisk");
 delete_recursive("/tmp/modules");
 package_extract_dir("modules", "/tmp/modules");
 set_metadata_recursive("/tmp/magisk", "uid", 0, "gid", 0, "dmode", 0777, "fmode", 0777);
-install_module() {
-  run_program("/sbin/busybox", "unzip", "/tmp/modules/$1.zip", "META-INF/com/google/android/*", "-d", "/tmp/modules/$1");
-  run_program("/sbin/busybox", "sh", "/tmp/modules/$1/META-INF/com/google/android/update-binary", "dummy", "1", "/tmp/modules/$1.zip");
-  delete_recursive("/tmp/modules/$1");
-}
+run_program("/sbin/busybox", "unzip", "/tmp/modules/core.zip", "META-INF/com/google/android/*", "-d", "/tmp/modules/core");
+run_program("/sbin/busybox", "sh", "/tmp/modules/core/META-INF/com/google/android/update-binary", "dummy", "1", "/tmp/modules/core.zip");
+delete_recursive("/tmp/modules/core");
 delete_recursive("/cache");
 delete_recursive("/data/dalvik-cache/*");
 delete_recursive("/tmp/modules");
